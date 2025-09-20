@@ -6,10 +6,7 @@ readme = "README.md"
 license = "MIT"
 authors = [{ name = "Luiz Otávio" }]
 requires-python = ">=3.13"
-dependencies = [
-  "langchain[anthropic,google-genai,ollama,openai]>=1.0.0a6",
-  "rich>=14.1.0",
-]
+dependencies = ["langchain[google-genai,ollama]>=1.0.0a6", "rich>=14.1.0"]
 
 [project.urls]
 Homepage = "https://www.otaviomiranda.com.br/"
@@ -32,6 +29,7 @@ ignore = [
   "D",      # All pydocstyle (D)
   "ANN401", # Checks that function arguments are annotated with a more specific type than Any.
   "ERA001", # Checks for commented-out Python code.
+  "A004",   # Shadowing Python Builtin
 ]
 
 [tool.ruff.lint.per-file-ignores]
