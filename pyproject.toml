@@ -1,0 +1,77 @@
+[project]
+name = "react_agent"
+version = "0.0.1"
+description = "react_agent"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Luiz Otávio" }]
+requires-python = ">=3.13"
+dependencies = [
+  "langchain[anthropic,google-genai,ollama,openai]>=1.0.0a6",
+  "rich>=14.1.0",
+]
+
+[project.urls]
+Homepage = "https://www.otaviomiranda.com.br/"
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+fix = true
+show-fixes = true
+indent-width = 4
+exclude = [".venv"]
+
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "T201",   # Checks for print statements, 
+  "COM812", # Checks for the absence of trailing commas.
+  "INP001", # Checks for packages that are missing an __init__.py file.
+  "D",      # All pydocstyle (D)
+  "ANN401", # Checks that function arguments are annotated with a more specific type than Any.
+  "ERA001", # Checks for commented-out Python code.
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["ANN201", "S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.ruff.lint.isort]
+known-first-party = ["react_agent"]
+
+[tool.pyright]
+typeCheckingMode = "standard"
+pythonVersion = "3.13"
+include = ["src", "tests"]
+exclude = [
+  "**/venv",
+  "**/.venv",
+  "**/env",
+  "**/.env",
+  "**/node_modules",
+  "**/__pycache__",
+]
+venv = ".venv"
+venvPath = "."
+executionEnvironments = [{ root = "src" }]
+
+[tool.pytest.ini_options]
+addopts = "-s --color=yes --tb=short"
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
