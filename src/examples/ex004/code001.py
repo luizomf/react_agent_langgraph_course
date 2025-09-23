@@ -1,109 +1,63 @@
-import operator
-from dataclasses import dataclass
-from typing import Annotated, Literal
+from collections.abc import Sequence
+from typing import Annotated, TypedDict
 
-from langgraph.graph import END, START, StateGraph
+from langchain.chat_models import init_chat_model
+from langchain_core.messages import BaseMessage, HumanMessage
+from langgraph.graph import END, START, StateGraph, add_messages
+from langgraph.graph.message import Messages
 from rich import print
+from rich.markdown import Markdown
 
-# Este é o último código da aula anterior
-
-# Definições do estado e dos nodes
-
-
-@dataclass
-class State:
-    nodes_path: Annotated[list[str], operator.add]  # operator.add = a + b
-    # Vamos usar esse current_number para nossa conditional edge
-    current_number: float = 0
+# llm = init_chat_model("google_genai:gemini-2.5-flash")
+llm = init_chat_model("ollama:gpt-oss:20b")
 
 
-def node_a(state: State) -> State:
-    final_state: State = State(nodes_path=["A"], current_number=state.current_number)
-    print("> node_a em execução", f"{state=}", f"{final_state=}")
-    return final_state  # só estou gerando um novo estado
+# NÃO PRECISA FAZER ISSO
+def reducer(a: Messages, b: Messages) -> Messages:
+    return add_messages(a, b)
 
 
-def node_b(state: State) -> State:
-    final_state: State = State(nodes_path=["B"], current_number=state.current_number)
-    print("> node_b em execução", f"{state=}", f"{final_state=}")
-    return final_state  # só estou gerando um novo estado
+# 1 - Defino o meu state
+class AgentState(TypedDict):
+    messages: Annotated[Sequence[BaseMessage], reducer]
 
 
-# TEMOS UM NOVO NODE!
-def node_c(state: State) -> State:
-    final_state: State = State(nodes_path=["C"], current_number=state.current_number)
-    print("> node_c em execução", f"{state=}", f"{final_state=}")
-    return final_state  # só estou gerando um novo estado
+# 2 - Defino os meus nodes
+def call_llm(state: AgentState) -> AgentState:
+    llm_result = llm.invoke(state["messages"])
+    return {"messages": [llm_result]}
 
 
-# A definição de uma função condicional
-# Essa função será usada como condição para uma `conditional edge`.
-# Ela também recebe o estado e terá o trabalho de retornar o nome da edge que
-# o grafo deve seguir.
-def the_conditions(state: State) -> Literal["goes_to_b", "goes_to_c"]:
-    # Vamos definir um valor arbitrário para ficar fácil de visualizar.
-    # Iremos para o `node_b` enquanto `current_number` for menor ou igual a 50
-    b_max_number = 50
-    should_go_to_b = state.current_number <= b_max_number
-
-    # Não é muito comum dar nomes para edges assim, onde temos:
-    # `goes_to_b` seria apenas `B`
-    # `goes_to_c` seria apenas `C`
-    # Só que eu queria te mostrar isso. Se o nome da edge for diferente do nome
-    # do nome, a sua edge acabou de ganhar um nome (no grafo desenhado isso se
-    # torna uma tag sobre o nome da edge).
-
-    if should_go_to_b:
-        # Então retornamos o nome da edge para o grafo seguir
-        return "goes_to_b"
-
-    # Único outro caminho possível é este
-    return "goes_to_c"
-
-
-# Definição e compilação do grafo
-
+# 3 - Crio o StateGraph
 builder = StateGraph(
-    State, input_schema=State, context_schema=None, output_schema=State
+    AgentState, context_schema=None, input_schema=AgentState, output_schema=AgentState
 )
 
-builder.add_node("A", node_a)
-builder.add_node("B", node_b)
-builder.add_node("C", node_c)  # NOVO NODE!!!
+# 4 - Adicionar nodes ao grafo
+builder.add_node("call_llm", call_llm)
+builder.add_edge(START, "call_llm")
+builder.add_edge("call_llm", END)
 
-# Aqui agora temos que mudar umas coisas
-# Ainda vamos de `__start__` para `A`
-builder.add_edge(START, "A")
-# Mas de `A` temos duas possibilidades, ou `B` ou `C`. Então precisamos definir
-# uma conditional edge.
-# Primeiro parâmetro: de onde estamos iniciando? `A`.
-# Segundo parâmetro: quais as condições? A função `the_conditions` faz isso.
-# Terceiro parâmetro: um mapeamento de qual edge vai para qual node
-builder.add_conditional_edges(
-    "A",
-    the_conditions,
-    {
-        "goes_to_b": "B",
-        "goes_to_c": "C",
-    },
-)
-
-# E agora qual nome vai para END? `B` e `C`.
-builder.add_edge("B", END)
-builder.add_edge("C", END)
-
-
+# 5 - Compilar o grafo
 graph = builder.compile()
 
 if __name__ == "__main__":
-    # Execução do código
+    current_messages: Sequence[BaseMessage] = []
 
-    print()
-    # 10 deve ir de `A` para `B`
-    response = graph.invoke(State(nodes_path=[], current_number=10))
-    print(f"{response=}")
-    print()
-    # 51 deve ir de `A` para `C`
-    response = graph.invoke(State(nodes_path=[], current_number=51))
-    print(f"{response=}")
-    print()
+    while True:
+        user_input = input("Digite sua mensage: ")
+        print(Markdown("---"))
+
+        if user_input.lower() in ["q", "quit"]:
+            print("Bye 👋")
+            print(Markdown("---"))
+            break
+
+        human_message = HumanMessage(user_input)
+        current_messages = [*current_messages, human_message]
+
+        result = graph.invoke({"messages": current_messages})
+        current_messages = result["messages"]
+
+        print(Markdown(str(result["messages"][-1].content)))
+        print(Markdown("---"))
