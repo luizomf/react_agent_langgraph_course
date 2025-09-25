@@ -57,13 +57,13 @@ Nesse momento o fluxo muda um pouco. Acontece algo semelhante a isso:
 IA: (SOLICITA A CHAMADA DA FERRAMENTA: multiply com 5.2 e 10)
 
 Dev: Chama a Ferramenta
-Dev: Injeta o resultado de volta na IA (520)
+Dev: Injeta o resultado de volta na IA (52.0)
 ```
 
 Depois disso, a IA retoma a conversa:
 
 ```text
-IA: Otávio, o resultado entre 5.2 * 10 é 520.
+IA: Otávio, o resultado entre 5.2 * 10 é 52.0.
 ```
 
 ---
