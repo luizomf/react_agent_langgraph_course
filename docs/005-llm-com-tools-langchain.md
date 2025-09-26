@@ -149,3 +149,13 @@ seguir:
 - Link do arquivo - [ex005 - code02.py](../src/examples/ex005/code01.py)
 
 ---
+
+## Unindo tudo com o LangGraph
+
+Agora que já sabemos como fazer todo o que vimos nas aulas anteriores, podemos
+unir tudo isso no grafo com o LangGraph. Explico tudo em vídeo e deixo o código
+completo na pasta `src/examples/ex006` (link abaixo):
+
+- Link da pasta ex006 - [ex006 (pasta)](../src/examples/ex006/)
+
+---
