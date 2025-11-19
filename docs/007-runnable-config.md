@@ -111,6 +111,13 @@ Agora os arquivos estão todos separados e foram copiados da aula anterior
 
 Assuntos (só para eu não esquecer de nada):
 
-- `RunnableConfig`
+- Atualizar para versão estável
+- Configurar `RunnableConfig` e pegar `config` dentro dos nodes
+- Alterar a temperatura do model usando `RunnableConfig`
+- Trocar de model usando `RunnableConfig`
+- Falar sobre dados de tracing e os metadados
+- Falar brevemente sobre `langchain_core.trackers.stdout.*`
+- Lembrar que existem várias outras coisas que podem ser feitas com `config`
+- ... próxima aula: `Runtime` e `Context`.
 
 ---
