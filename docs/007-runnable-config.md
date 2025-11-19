@@ -68,6 +68,35 @@ para algum objetivo qualquer. Por exemplo: se eu quiser trocar de LLM no meio da
 execução do grafo, em qualquer node, basta chamar `invoke` (ou outros métodos do
 Runnable) com outra `config`.
 
+## Diferença entre configuração e estado
+
+Se houvesse apenas uma coisa que eu quisesse que você tirasse dessa aula, seria
+a diferença entre **Configurações** e **Estado**.
+
+Nós já vimos o `State` e ele ainda vai nos acompanhar por várias e várias aulas.
+Mas pode ser tentador colocar campos que seriam de configuração da aplicação ou
+do grafo no estado.
+
+O estado é voltado para campos que geralmente estão relacionadas ao modelo (LLM)
+ou algum node. Valores do estado podem ser alterados em tempo de execução, basta
+que um node retorne um novo valor.
+
+Estes valores podem incluir o histórico de conversas (`messages`), chamadas para
+ferramentas, mensagens do sistema, etc.
+
+Já a parte de configurações, especificamente `RunnableConfig`, é voltada para
+metadados relacionados com a aplicação. Um exemplo disso é `thread_id`, que
+vimos antes. Este campo é voltado para a configuração de memória de curto prazo
+(ou a conversa atual). O modelo nunca precisará saber este valor.
+
+Além disso, essa configuração está voltada para a execução do grafo. Com isso,
+quero dizer que eu poderia trocar a configuração temporariamente em um
+determinado node.
+
+Por exemplo: eu poderia ter um LLM rápido para tarefas simples e rápidas, mas
+outro LLM lento e mais robusto para tarefas que envolvem raciocínio. Esse tipo
+de configuração deve ser feito em `RunnableConfig`.
+
 ## Vamos entender isso na aula em vídeo
 
 Vou falar mais sobre tudo isso durante a aula em vídeo, por que tem algumas
