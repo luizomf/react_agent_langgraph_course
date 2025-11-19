@@ -1,5 +1,9 @@
 # RunnableConfig - Além do `thread_id`
 
+> **Observação importante**: copiei todos os arquivos da nossa última aula e
+> alterei todos os imports de `ex006` para `ex007`. Não se esqueça do
+> `langgraph.json`.
+
 Uma parte importante do LangGraph / LangChain são os runnables.
 
 Referência: https://reference.langchain.com/python/langchain_core/runnables/
