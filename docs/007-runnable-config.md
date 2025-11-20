@@ -111,7 +111,7 @@ Agora os arquivos estão todos separados e foram copiados da aula anterior
 
 Assuntos (só para eu não esquecer de nada):
 
-- Atualizar para versão estável
+- Atualizar para versão estável - OK
 - Configurar `RunnableConfig` e pegar `config` dentro dos nodes
 - Alterar a temperatura do model usando `RunnableConfig`
 - Trocar de model usando `RunnableConfig`

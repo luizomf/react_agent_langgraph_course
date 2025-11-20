@@ -3,18 +3,37 @@ from typing import Literal
 from langchain_core.messages import AIMessage, ToolMessage
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.constants import START
-from langgraph.graph.state import CompiledStateGraph, StateGraph
+from langgraph.graph.state import CompiledStateGraph, RunnableConfig, StateGraph
 from pydantic import ValidationError
+from rich import print
 
 from examples.ex007.state import State
 from examples.ex007.tools import TOOLS, TOOLS_BY_NAME
 from examples.ex007.utils import load_llm
 
 
-def call_llm(state: State) -> State:
+def call_llm(state: State, config: RunnableConfig) -> State:
     print("> call llm")
+    user_type = config.get("configurable", {}).get("user_type")
+    model_provider = "ollama" if user_type == "plus" else "ollama"  # noqa: RUF034
+    model = "gpt-oss:20b" if user_type == "plus" else "qwen3-coder:30b"
+
     llm_with_tools = load_llm().bind_tools(TOOLS)
-    result = llm_with_tools.invoke(state["messages"])
+    llm_with_config = llm_with_tools.with_config(
+        config={
+            "configurable": {
+                "model": model,
+                "model_provider": model_provider,
+            }
+        }
+    )
+
+    print(llm_with_config.temperature)
+
+    result = llm_with_config.invoke(
+        state["messages"],
+    )
+
     return {"messages": [result]}
 
 

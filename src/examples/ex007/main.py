@@ -1,4 +1,8 @@
-from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
+import builtins
+from typing import Literal
+
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langchain_core.tracers.stdout import FunctionCallbackHandler
 from langgraph.graph.state import RunnableConfig
 from rich import print
 from rich.markdown import Markdown
@@ -7,10 +11,22 @@ from rich.prompt import Prompt
 from examples.ex007.graph import build_graph
 from examples.ex007.prompts import SYSTEM_PROMPT
 
+print()
+
 
 def main() -> None:
     graph = build_graph()
-    config = RunnableConfig(configurable={"thread_id": 1})
+
+    fn_handler_cb = FunctionCallbackHandler(function=builtins.print)
+    user_type: Literal["plus", "enterprise"] = "plus"
+    config = RunnableConfig(
+        run_name="meu_grafo",
+        tags=["enterprise"],
+        configurable={"thread_id": 1, "user_type": user_type},
+        max_concurrency=4,
+        recursion_limit=25,
+        callbacks=[fn_handler_cb],
+    )
     all_messages: list[BaseMessage] = []
 
     prompt = Prompt()
@@ -31,13 +47,20 @@ def main() -> None:
 
         result = graph.invoke({"messages": current_loop_messages}, config=config)
 
-        print("[bold cyan]RESPOSTA: \n")
-        print(Markdown(result["messages"][-1].content))
-        print(Markdown("\n\n  ---  \n\n"))
+        model_name = ""
+        last_message = result["messages"][-1]
+
+        if isinstance(last_message, AIMessage):
+            model_name = last_message.response_metadata.get("model", "")
+
+        # print(f"[bold cyan]RESPOSTA ({model_name}): \n")
+        # print(Markdown(last_message.text))
+        # print(last_message)
+        # print(Markdown("\n\n  ---  \n\n"))
 
         all_messages = result["messages"]
 
-    print(all_messages)
+    # print(graph.get_state(config=config))
 
 
 if __name__ == "__main__":
