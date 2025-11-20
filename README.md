@@ -43,6 +43,9 @@ mostrado nas aulas.
 - [002 — Chat simples com LangChain](./docs/002-chat-simples-langchain.md)
 - [003 — Introdução ao LangGraph](./docs/003-introducao-ao-langgraph.md)
 - [004 — LangGraph com LLM](./docs/004-langgraph-com-llm.md)
+- [005 — LangChain com LLM e Tools](./docs/005-llm-com-tools-langchain.md)
+- [006 — LangStudio](./docs/006-langgraph-studio.md)
+- [007 — config e RunnableConfig](./docs/007-runnable-config.md)
 
 _(a lista será atualizada conforme novas aulas forem publicadas)_
 
