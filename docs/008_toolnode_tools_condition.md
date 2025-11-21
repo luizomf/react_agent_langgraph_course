@@ -6,3 +6,11 @@ para este mesmo propósito. Mas deixo links úteis de referência:
 
 - https://reference.langchain.com/python/langgraph/agents/?h=toolnode#langgraph.prebuilt.tool_node.ToolNode
 - https://reference.langchain.com/python/langgraph/agents/?h=tools_con#langgraph.prebuilt.tool_node.tools_condition
+
+## Arquivos da aula
+
+Os arquivos para essa aula estão na pasta a seguir:
+
+- src/examples/ex008
+
+---

@@ -3,7 +3,7 @@
 Este repositório acompanha a playlist no YouTube sobre **LangChain** e
 **LangGraph**.
 
-👉 Playlist completa:
+Playlist completa:
 [YouTube — Curso LangChain & LangGraph](https://www.youtube.com/playlist?list=PLbIBj8vQhvm09IqqLYIwLF5dGrcbJzFZc)
 
 O **foco principal é o vídeo**. Aqui você encontra apenas o **material de
@@ -15,7 +15,6 @@ mostrado nas aulas.
 ## Estrutura do repositório
 
 ```
-
 .
 ├── docs/               # Textos de apoio (um por aula)
 │   ├── 001-*.md
@@ -27,13 +26,12 @@ mostrado nas aulas.
 │   └── ...
 ├── pyproject.toml      # Dependências (uv)
 └── uv.lock
-
 ```
 
 - Os arquivos em `docs/` seguem a numeração das aulas.
 - Os diretórios em `src/examples/` seguem a mesma numeração, cada um com os
   códigos usados em aula.
-- Assim, fica fácil relacionar vídeo <-> doc <-> exemplo de código.
+- Assim, fica fácil relacionar **vídeo -> doc -> exemplo de código**.
 
 ---
 
@@ -46,8 +44,26 @@ mostrado nas aulas.
 - [005 — LangChain com LLM e Tools](./docs/005-llm-com-tools-langchain.md)
 - [006 — LangStudio](./docs/006-langgraph-studio.md)
 - [007 — config e RunnableConfig](./docs/007-runnable-config.md)
+- [008 — ToolNode e tools_conditions](./docs/008_toolnode_tools_condition.md)
 
-_(a lista será atualizada conforme novas aulas forem publicadas)_
+_(esta lista será atualizada conforme novas aulas forem publicadas - quando/se
+eu lembrar disso)_
+
+---
+
+## Exemplos de Código
+
+Abaixo estão as pastas com exemplos de código para cada aula
+
+- [ex001](./src/examples/ex001) - `main.py`
+- [ex002](./src/examples/ex002) - `main.py`
+- [ex003](./src/examples/ex003) - `ex003_1.py`, `ex003_2.py`
+- [ex004](./src/examples/ex004) - `code001.py`, `code002.py`
+- [ex005](./src/examples/ex005) - `code01.py`
+- [ex006](./src/examples/ex006) - `graph.py`, `main.py`, `state.py`, `tools.py`
+- [ex007](./src/examples/ex007) - `graph.py`, `main.py`, `state.py`, `tools.py`
+- [ex008](./src/examples/ex008) - `graph.py`, `nodes.py`, `main.py`, `state.py`,
+  `tools.py`
 
 ---
 
@@ -63,22 +79,25 @@ uv sync
 
 ### Rodar exemplos
 
+Você precisa criar o seu arquivo `.env` conforme mostro nas primeiras aulas.
+
 ```bash
 uv run --env-file=".env" src/examples/ex001/main.py
 ```
 
-Na aula em vídeo estou mencionando o que estou usando em `src/examples/`
-(`ex001`, `ex002`, ...). Verifique o doc correspondente em `docs/NNN-*.md` para
-entender o que está acontecendo.
+Na aula em vídeo eu menciono qual pasta estou usando (`ex001`, `ex002`, ...).
+Veja também o doc correspondente em `docs/NNN-*.md`.
 
 ---
 
-## Links importantes
+## Links úteis
+
+Se quiser me acompanhar. No meu site tem cursos que tenho e na newsletter te
+mando tudo que publico gratuitamente pelo menos 3 vezes por semana.
 
 - 🌐 Site: [otaviomiranda.com.br](https://www.otaviomiranda.com.br/)
 - 📰 Newsletter: [luizomf.substack.com](https://luizomf.substack.com/)
 
-Se quiser acompanhar novidades, tutoriais e conteúdos complementares, não
-esqueça de se inscrever na newsletter.
+É isso por agora.
 
 ---
