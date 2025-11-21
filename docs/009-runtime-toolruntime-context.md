@@ -51,6 +51,6 @@ modelo.**
 
 O código para esta aula estará na pasta:
 
-- [src/examples/ex009](./src/examples/ex009)
+- [../src/examples/ex009](../src/examples/ex009)
 
 ---
