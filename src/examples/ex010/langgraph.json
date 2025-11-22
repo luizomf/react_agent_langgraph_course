@@ -1,7 +1,7 @@
 {
   "$schema": "https://langgra.ph/schema.json",
   "graphs": {
-    "grafo": "src/examples/ex009/graph.py:build_graph"
+    "grafo": "src/examples/ex010/graph.py:build_graph"
   },
   "env": ".env",
   "python_version": "3.13",

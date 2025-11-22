@@ -1,8 +1,8 @@
 from langchain.tools import BaseTool, tool
 from langgraph.prebuilt.tool_node import ToolRuntime
 
-from examples.ex009.context import Context
-from examples.ex009.state import State
+from examples.ex010.context import Context
+from examples.ex010.state import State
 
 
 @tool

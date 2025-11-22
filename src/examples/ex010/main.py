@@ -4,9 +4,9 @@ from rich import print
 from rich.markdown import Markdown
 from rich.prompt import Prompt
 
-from examples.ex009.context import Context
-from examples.ex009.graph import build_graph
-from examples.ex009.prompts import SYSTEM_PROMPT
+from examples.ex010.context import Context
+from examples.ex010.graph import build_graph
+from examples.ex010.prompts import SYSTEM_PROMPT
 
 
 def main() -> None:

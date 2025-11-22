@@ -3,9 +3,9 @@ from langgraph.constants import END, START
 from langgraph.graph.state import CompiledStateGraph, StateGraph
 from langgraph.prebuilt.tool_node import tools_condition
 
-from examples.ex009.context import Context
-from examples.ex009.nodes import call_llm, tool_node
-from examples.ex009.state import State
+from examples.ex010.context import Context
+from examples.ex010.nodes import call_llm, tool_node
+from examples.ex010.state import State
 
 
 def build_graph() -> CompiledStateGraph[State, Context, State, State]:

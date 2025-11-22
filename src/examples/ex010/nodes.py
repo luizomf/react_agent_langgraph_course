@@ -1,10 +1,10 @@
 from langgraph.prebuilt.tool_node import ToolNode
 from langgraph.runtime import Runtime
 
-from examples.ex009.context import Context
-from examples.ex009.state import State
-from examples.ex009.tools import TOOLS
-from examples.ex009.utils import load_llm
+from examples.ex010.context import Context
+from examples.ex010.state import State
+from examples.ex010.tools import TOOLS
+from examples.ex010.utils import load_llm
 
 tool_node = ToolNode(tools=TOOLS)
 
