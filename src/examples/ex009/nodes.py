@@ -1,6 +1,7 @@
-from langgraph.graph.state import RunnableConfig
 from langgraph.prebuilt.tool_node import ToolNode
+from langgraph.runtime import Runtime
 
+from examples.ex009.context import Context
 from examples.ex009.state import State
 from examples.ex009.tools import TOOLS
 from examples.ex009.utils import load_llm
@@ -8,9 +9,11 @@ from examples.ex009.utils import load_llm
 tool_node = ToolNode(tools=TOOLS)
 
 
-def call_llm(state: State, config: RunnableConfig) -> State:
+def call_llm(state: State, runtime: Runtime[Context]) -> State:
     print("> call llm")
-    user_type = config.get("configurable", {}).get("user_type")
+    ctx = runtime.context
+    user_type = ctx.user_type
+
     model_provider = "ollama" if user_type == "plus" else "ollama"  # noqa: RUF034
     model = "gpt-oss:20b" if user_type == "plus" else "qwen3-coder:30b"
 
