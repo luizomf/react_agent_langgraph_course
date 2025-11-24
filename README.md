@@ -45,6 +45,7 @@ mostrado nas aulas.
 - [006 — LangStudio](./docs/006-langgraph-studio.md)
 - [007 — config e RunnableConfig](./docs/007-runnable-config.md)
 - [008 — ToolNode e tools_conditions](./docs/008_toolnode_tools_condition.md)
+- [009 — Context, Runtime e ToolRuntime](./docs/009-runtime-toolruntime-context.md)
 
 _(esta lista será atualizada conforme novas aulas forem publicadas - quando/se
 eu lembrar disso)_
@@ -55,15 +56,16 @@ eu lembrar disso)_
 
 Abaixo estão as pastas com exemplos de código para cada aula
 
-- [ex001](./src/examples/ex001) - `main.py`
-- [ex002](./src/examples/ex002) - `main.py`
-- [ex003](./src/examples/ex003) - `ex003_1.py`, `ex003_2.py`
-- [ex004](./src/examples/ex004) - `code001.py`, `code002.py`
-- [ex005](./src/examples/ex005) - `code01.py`
-- [ex006](./src/examples/ex006) - `graph.py`, `main.py`, `state.py`, `tools.py`
-- [ex007](./src/examples/ex007) - `graph.py`, `main.py`, `state.py`, `tools.py`
-- [ex008](./src/examples/ex008) - `graph.py`, `nodes.py`, `main.py`, `state.py`,
-  `tools.py`
+- [ex001](./src/examples/ex001)
+- [ex002](./src/examples/ex002)
+- [ex003](./src/examples/ex003)
+- [ex004](./src/examples/ex004)
+- [ex005](./src/examples/ex005)
+- [ex006](./src/examples/ex006)
+- [ex007](./src/examples/ex007)
+- [ex008](./src/examples/ex008)
+- [ex008](./src/examples/ex008)
+- [ex009](./src/examples/ex009)
 
 ---
 
