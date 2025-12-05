@@ -1,16 +1,20 @@
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
 from langgraph.graph.state import RunnableConfig
+from langgraph.pregel.main import asyncio
 from rich import print
 from rich.markdown import Markdown
 from rich.prompt import Prompt
 
+from examples.ex010.checkpointer import build_checkpointer
 from examples.ex010.context import Context
 from examples.ex010.graph import build_graph
 from examples.ex010.prompts import SYSTEM_PROMPT
+from examples.ex010.utils import Connection, async_lifespan
 
 
-def main() -> None:
-    graph = build_graph()
+async def run_graph(connection: Connection) -> None:
+    checkpointer = build_checkpointer(connection)
+    graph = build_graph(checkpointer)
 
     context = Context(user_type="plus")
 
@@ -56,5 +60,10 @@ def main() -> None:
     print(graph.get_state(config=config))
 
 
+async def main() -> None:
+    async with async_lifespan() as connection:
+        await run_graph(connection)
+
+
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

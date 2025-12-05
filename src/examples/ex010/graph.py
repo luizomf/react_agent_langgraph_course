@@ -1,14 +1,16 @@
-from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.constants import END, START
 from langgraph.graph.state import CompiledStateGraph, StateGraph
 from langgraph.prebuilt.tool_node import tools_condition
+from langgraph.pregel.main import BaseCheckpointSaver
 
 from examples.ex010.context import Context
 from examples.ex010.nodes import call_llm, tool_node
 from examples.ex010.state import State
 
 
-def build_graph() -> CompiledStateGraph[State, Context, State, State]:
+def build_graph(
+    checkpointer: BaseCheckpointSaver,
+) -> CompiledStateGraph[State, Context, State, State]:
     builder = StateGraph(
         state_schema=State,
         context_schema=Context,
@@ -23,4 +25,4 @@ def build_graph() -> CompiledStateGraph[State, Context, State, State]:
     builder.add_conditional_edges("call_llm", tools_condition, ["tools", END])
     builder.add_edge("tools", "call_llm")
 
-    return builder.compile(checkpointer=InMemorySaver())
+    return builder.compile(checkpointer=checkpointer)
