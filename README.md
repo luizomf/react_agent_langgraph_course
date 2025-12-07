@@ -46,6 +46,7 @@ mostrado nas aulas.
 - [007 — config e RunnableConfig](./docs/007-runnable-config.md)
 - [008 — ToolNode e tools_conditions](./docs/008_toolnode_tools_condition.md)
 - [009 — Context, Runtime e ToolRuntime](./docs/009-runtime-toolruntime-context.md)
+- [010 — Conceito de Lifespan](./docs/010-lifespan.md)
 
 _(esta lista será atualizada conforme novas aulas forem publicadas - quando/se
 eu lembrar disso)_
@@ -66,6 +67,7 @@ Abaixo estão as pastas com exemplos de código para cada aula
 - [ex008](./src/examples/ex008)
 - [ex008](./src/examples/ex008)
 - [ex009](./src/examples/ex009)
+- [ex009](./src/examples/ex010)
 
 ---
 
