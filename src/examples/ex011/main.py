@@ -5,11 +5,11 @@ from rich import print
 from rich.markdown import Markdown
 from rich.prompt import Prompt
 
-from examples.ex010.checkpointer import build_checkpointer
-from examples.ex010.context import Context
-from examples.ex010.graph import build_graph
-from examples.ex010.prompts import SYSTEM_PROMPT
-from examples.ex010.utils import Connection, async_lifespan
+from examples.ex011.checkpointer import build_checkpointer
+from examples.ex011.context import Context
+from examples.ex011.graph import build_graph
+from examples.ex011.prompts import SYSTEM_PROMPT
+from examples.ex011.utils import Connection, async_lifespan
 
 
 async def run_graph(connection: Connection) -> None:
