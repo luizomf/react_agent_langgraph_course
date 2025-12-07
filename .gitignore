@@ -1,3 +1,13 @@
+_local_data/
+temp/
+.DS_Store
+db.json
+*.sqlite
+*.sqlite3
+*.sqlite*BKP
+.langgraph_api/
+temp
+audios/
 **/.langgraph_api
 
 # Logs
