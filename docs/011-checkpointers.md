@@ -61,6 +61,38 @@ soluções mais escaláveis e assíncronas.
 
 ---
 
+## Docker
+
+Se você for subir um container com o Docker para o PostgreSQL, já vou deixar
+isso pronto para você:
+
+```yml
+services:
+  psql:
+    container_name: psql
+    hostname: psql:18
+    image: postgres
+    restart: 'no'
+    environment:
+      POSTGRES_USER: langgraph # ⚠️ IMPORTANTE: Usuário
+      POSTGRES_PASSWORD: defina_sua_senha # ⚠️ IMPORTANTE: senha
+      POSTGRES_DB: langgraph # ⚠️ IMPORTANTE: base de dados
+      PGDATA: /var/lib/postgresql/18/docker
+    volumes:
+      # ⚠️ IMPORTANTE: Estou em src/examples/ex010/.
+      # ⚠️ IMPORTANTE: Todas as pastas _local_data precisam estar no .gitignore.
+      # ℹ️ INFO: Isso vai gerar a pasta src/examples/ex010/_local_data no projeto
+      # 🆘 docker-compose -f src/examples/ex010/compose.yml up
+      - ./_local_data/postgresql:/var/lib/postgresql
+    ports:
+      - 5432:5432
+```
+
+Veja que deixei vários recadinhos para você no `compose.yml`. Não adicione sua
+senha ali, prefira usar o `.env` ou outro local seguro.
+
+---
+
 ## Na aula 11
 
 Na aula 11 (em vídeo), vou te mostrar como configurar checkpointers de uma forma
