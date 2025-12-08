@@ -1,0 +1,15 @@
+services:
+  psql:
+    container_name: psql
+    hostname: psql
+    image: postgres:18
+    restart: 'no'
+    volumes:
+      # ⚠️ IMPORTANTE: Estou em src/examples/ex010/.
+      # ⚠️ IMPORTANTE: Todas as pastas _local_data precisam estar no .gitignore.
+      # ℹ️ INFO: Isso vai gerar a pasta src/examples/ex010/_local_data no projeto
+      # 🆘 docker-compose -f src/examples/ex010/compose.yml up
+      - ./_local_data/postgresql:/var/lib/postgresql
+    ports:
+      - 5432:5432
+    env_file: '../../../.env'

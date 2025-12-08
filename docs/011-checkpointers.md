@@ -70,8 +70,8 @@ isso pronto para você:
 services:
   psql:
     container_name: psql
-    hostname: psql:18
-    image: postgres
+    hostname: psql
+    image: postgres:18
     restart: 'no'
     environment:
       POSTGRES_USER: langgraph # ⚠️ IMPORTANTE: Usuário
