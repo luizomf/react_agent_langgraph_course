@@ -12,6 +12,9 @@
 # `ChatOpenAI` do pacote `langchain_openai` isso deixaria o meu código um pouco
 # mais acoplado, já que eu precisaria fazer isso sempre que mudasse de modelo.
 # Pense nele como um atalho para criar um novo Chat Model.
+
+from dotenv import load_dotenv
+import os
 from langchain.chat_models import init_chat_model
 
 ################################################################################
@@ -39,7 +42,7 @@ from langchain.chat_models import init_chat_model
 
 # Vou usar Ollama neste exemplo
 
-llm = init_chat_model("ollama:gpt-oss:20b")
+llm = init_chat_model("google_genai:gemini-2.5-flash", api_key=os.getenv("GOOGLE_API_KEY"))  # passa explicitamente
 
 # A beleza do LangChain é que daqui para baixo, tudo é praticamente igual
 # para qualquer modelo.
